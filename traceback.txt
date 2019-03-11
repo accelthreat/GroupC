@@ -1,22 +1,48 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
-While running game code:
-  File "game/script.rpy", line 495, in script
-    jump .conclusion
-ScriptError: could not find label 'looping.conclusion'.
+After initialization, but before game start.
+  File "game/script.rpy", line 561, in prepare_screen
+    screen credits():
+  File "game/script.rpy", line 561, in prepare
+    screen credits():
+  File "game/script.rpy", line 562, in prepare
+    vbox:
+  File "game/script.rpy", line 562, in prepare
+    vbox:
+  File "game/script.rpy", line 569, in prepare
+    text "Music by Eric Matyas
+SyntaxError: EOL while scanning string literal (game/script.rpy, line 569)
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 495, in script
-    jump .conclusion
-  File "C:\Users\Matthew Rey\Documents\renpy-7.1.3-sdk\renpy\ast.py", line 1633, in execute
-    rv = renpy.game.script.lookup(target)
-  File "C:\Users\Matthew Rey\Documents\renpy-7.1.3-sdk\renpy\script.py", line 875, in lookup
-    raise ScriptError("could not find label '%s'." % str(original))
-ScriptError: could not find label 'looping.conclusion'.
+  File "C:\Users\Matthew Rey\Documents\renpy-7.1.3-sdk\renpy\bootstrap.py", line 313, in bootstrap
+    renpy.main.main()
+  File "C:\Users\Matthew Rey\Documents\renpy-7.1.3-sdk\renpy\main.py", line 513, in main
+    run(restart)
+  File "C:\Users\Matthew Rey\Documents\renpy-7.1.3-sdk\renpy\main.py", line 90, in run
+    renpy.display.screen.prepare_screens()
+  File "C:\Users\Matthew Rey\Documents\renpy-7.1.3-sdk\renpy\display\screen.py", line 909, in prepare_screens
+    s.ast.prepare_screen()
+  File "game/script.rpy", line 561, in prepare_screen
+    screen credits():
+  File "game/script.rpy", line 561, in prepare
+    screen credits():
+  File "game/script.rpy", line 562, in prepare
+    vbox:
+  File "game/script.rpy", line 562, in prepare
+    vbox:
+  File "game/script.rpy", line 569, in prepare
+    text "Music by Eric Matyas
+  File "C:\Users\Matthew Rey\Documents\renpy-7.1.3-sdk\renpy\pyanalysis.py", line 700, in ast_eval
+    return self.ast_eval_literal(expr)[0]
+  File "C:\Users\Matthew Rey\Documents\renpy-7.1.3-sdk\renpy\pyanalysis.py", line 684, in ast_eval_literal
+    expr = py_compile(expr, 'eval', ast_node=True)
+  File "C:\Users\Matthew Rey\Documents\renpy-7.1.3-sdk\renpy\python.py", line 674, in py_compile
+    raise e
+SyntaxError: EOL while scanning string literal (game/script.rpy, line 569)
 
 Windows-8-6.2.9200
 Ren'Py 7.1.3.1092
-GroupC 1.0
-Sun Mar 10 15:56:54 2019
+Finding the Light 1.0
+Mon Mar 11 22:17:30 2019

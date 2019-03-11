@@ -1,12 +1,25 @@
-﻿define mc = Character("Protag")
+﻿define mc = Character("Kara")
 define sis = Character("Lil Sis")
 define gpa = Character("Grandpa")
-define edge = Character("Edgelord")
+define edge = Character("Gerald")
+define narrator = nvl_narrator
 
 define wImg = 400
 define lImg = 800
     
-
+screen credits():
+    zorder 100
+    vbox:
+        text "Credits"
+        text "Barbara David"
+        text "China Dupaya"
+        text "Kayla Mendoza"
+        text "Matthew Rey"
+        text "Grandpa sprites from: https://teameleveneleven.itch.io/sc2vn"
+        text "Music by Eric Matyas"
+        text "www.soundimage.org"
+        textbutton "Close" action Hide("message_screen")
+        
 image mc puzzled:
     "mc puzzled.png"
     size (wImg,lImg)
@@ -110,8 +123,18 @@ init:
     $ sshake = Shake((0, 0, 0, 0), 1.0, dist=15)
     define shake_and_flash = ComposeTransition(dissolve, sshake, flash)
 
-
 label start:
+    scene black
+    with Pause(1)
+
+    show text "Group C presents..." with dissolve
+    with Pause(2)
+
+    hide text with dissolve
+    show text "Finding the light" with dissolve
+    with Pause(2)
+    hide text with dissolve
+    play music "music/starlight.mp3"
     scene bg earth2
     with fade
 
@@ -191,8 +214,11 @@ label start:
             mc "I saw it, I really did."
             show sis angry
             sis "But how do I know you're not lying?!"
-            show gpa determined
+            hide sis
+            show gpa determined at right with dissolve
             gpa "Try something better, kid!"
+            hide gpa with dissolve
+            show sis angry at right with dissolve 
             jump .battle1
 
         "Fine then, don’t believe me.":
@@ -200,26 +226,35 @@ label start:
             mc "Fine then, don't believe me."
             show sis angry
             sis "Hmph!"
-            show gpa disappointed
+            hide sis
+            show gpa disappointed at right with dissolve
             gpa "...That's not convincing. At all."
+            hide gpa with dissolve
+            show sis angry at right with dissolve
             jump .battle1
 
     menu .battle2:
             "Show grandpa":
                 jump .conclusion
-            "Do some shit":
+            "Promise":
                 jump .wrong_item
         # how 2 do inventory stuff haha just present grandpa profile or smth
 
     label .wrong_item:
+        mc "I promise!"
         show sis angry
-        sis "...That doesn't make any sense!"
+        sis "I still don't believe you!"
         jump .battle2
 
     label .conclusion:
         show mc brave
         mc "Grandpa’s right here!"
-        show gpa determined with moveinleft
+        scene bg earth2 with dissolve
+        show mc brave:
+            zoom 1.2 yalign 0.3
+        show sis angry at right:
+            zoom 1.1 yalign 0.9
+        show gpa determined 
         gpa "Skylight’s real, my child. It’s been gone a long time, but maybe it will come back soon."
         show sis thinking
         sis "Really grandpa? Hmm… I guess it is real then!"
@@ -254,7 +289,7 @@ label start:
 
 label grandpa:
     $ protag_inv = Inventory("Your Inventory")
-    $ journal = Item(name="Journal", desc="Grandpas Calculus/Physics Journal by (Young and Freedman)", icon="journal.png", act=Show("message_screen", message="The slope of the tangent line of a limacon is dy/dx\nwhere dy = dy/dΘ and dx = dx/dΘ\nTherefore, the light will come back after 75 years"))
+    $ journal = Item(name="Journal", desc="Grandpas Calculus/Physics Journal by (Young and Freedman)", icon="journal.png", act=Show("message_screen", message="The slope of the tangent line of a polar curve is dy/dx\nwhere dy = dy/dΘ and dx = dx/dΘ\nThe area of inside a polar curve is given by\none half of the integral from angle alpha to beta of the function r(Θ)^2 dΘ.\nTherefore, the light will come back after 75 years"))
     $ cap = Item(name="Bottle Cap", desc="The currency of your village", icon="cap.png", value=1)
     scene bg indoor2 with fade
     show gpa
@@ -341,7 +376,7 @@ label edgelord:
         sis "Wait, he d--"
 
         # interrupts
-        edge "Nothing ever good happens here, Protag. Except maybe that one time I almost died while fixing the roof. That was nice."
+        edge "Nothing ever good happens here, Kara. Except maybe that one time I almost died while fixing the roof. That was nice."
 
         show sis angry flip
 
@@ -496,7 +531,7 @@ label edgelord:
                     #     yalign 0.5
                     edge "What the hell is this?"
 
-                    mc "...Math and Physics. It calculates when the clouds will start clearing up using something called vectors and parabolic hyperboloid and what not. Anyway, it's going to be about this time."
+                    mc "...Math and Physics. It calculates when the clouds will start clearing up using something called vectors and elliptic hyperboloids and what not. Anyway, it's going to be about this time."
 
                     edge "...Huh."
 
@@ -518,8 +553,9 @@ label edgelord:
     label .conclusion:
         # battle end wahu
 
-        edge "Fine, you know what? _Maybe_ I'm going to consider that it will come back."
+        edge "Fine, you know what? Maybe I'm going to consider that it will come back."
 
+        show sis happy
         sis "Yay!"
 
         edge "But know that if it doesn't actually happen, I'm really going to tell everyone that the both of you are dumb AND crazy."
@@ -528,3 +564,18 @@ label edgelord:
 
         show edge smile
         edge "Heh, we'll see about that."
+        scene black with fade
+        show text "The End" with dissolve
+        with Pause(2)
+        hide text with dissolve
+        #show screen credits 
+        $ renpy.show_screen("credits")
+        # show text "Credits\nBarbara David
+        #     \nChina Dupaya
+        #     \nKayla Mendoza
+        #     \nMatthew Rey
+        #     \nGrandpa sprites from: https://teameleveneleven.itch.io/sc2vn
+        #     \nMusic by Eric Matyas
+        #     \nwww.soundimage.org" with dissolve
+        # with Pause(2)
+        # hide text with dissolve 
